@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <script>
+     <script>
         // 1 
         function foo() {
             console.log(this.a)
@@ -71,7 +71,60 @@
         <img src="https://user-gold-cdn.xitu.io/2018/11/15/16717eaf3383aae8?imageslim" alt="">
     </div>
 
+    <h1> React中的this指向</h1>
 
+   <!--  <script>
+        // 'use strict';
+
+        function display() {
+            console.log(this); // 'this' 将指向全局变量 、严格模式下为"undefined"
+        }
+
+        display()
+
+        let obj = {
+            tmp: 'Yes!',
+            testLog: function () {
+                console.log(this.tmp);
+            }
+        };
+        // obj.testLog();
+        let tmpLog = obj.testLog
+
+        tmpLog()
+
+        /*  在上面的例子里，当我们调用 tmpLog() 时，
+         我们没有指定一个具体的上下文对象。这是一个没有所有者对象的纯函数调用。
+         在这种情况下，tmpLog() 内部的 this 值回退到默认绑定。
+         现在这个 this 指向全局对象，在严格模式下，它指向 undefined。 */
+        class Foo {
+            constructor(name) {
+                this.name = name
+            }
+
+            display() {
+                console.log(this.name);
+            }
+        }
+
+        var foo = new Foo('Saurabh');
+        foo.display(); // Saurabh
+
+        //下面的赋值操作模拟了上下文的丢失。 
+        //与实际在 React Component 中将处理程序作为 callback 参数传递相似。
+        var display = foo.display;
+        display(); // TypeError: this is undefined
+    </script>
+ -->
+
+    <script>
+        for (var i = 1; i < 5; i++) {
+            setTimeout(function timer() {
+                console.log(i)
+            }, i * 1000)
+        }
+    </script>
+    
 </body>
 
 </html>
