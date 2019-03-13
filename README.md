@@ -2,5 +2,6 @@
 - 算法
 - ES6 部分
 - JavaScript 容易出错的地方
+- You-Dont-Know-Javascript 
 
 小白上路

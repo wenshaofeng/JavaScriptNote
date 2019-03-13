@@ -5,20 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>测试</title>
 </head>
 
 <body>
     <script>
-        a = 2;
-        var a
-        console.log(a);
+        for (var i = 1; i <= 5; i++) {
+            (function () {
+                var j = i
+                setTimeout(function timer() {
+                    console.log(j);
 
-        console.log(b);
-        var b = 2 
-        
-
+                },j*1000)
+            })()
+        }
+       
     </script>
+
 </body>
 
 </html>
