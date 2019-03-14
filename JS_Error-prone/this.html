@@ -9,7 +9,7 @@
 </head>
 
 <body>
-     <script>
+    <script>
         // 1 
         function foo() {
             console.log(this.a)
@@ -46,8 +46,6 @@
         fn.bind().bind(a3)() // => ?  window
 
         console.log(null == undefined);
-        
-
     </script>
 
     第一题:
@@ -73,7 +71,7 @@
 
     <h1> React中的this指向</h1>
 
-   <!--  <script>
+    <!--  <script>
         // 'use strict';
 
         function display() {
@@ -124,7 +122,22 @@
             }, i * 1000)
         }
     </script>
-    
+
+
+    <script>
+        var obj = {
+            id: 'awesome',
+            cool: function cooFn() {
+                console.log(this.id)
+            }
+
+        }
+        var id = 'not awesome'
+
+        obj.cool() // awesonme 
+        setTimeout(obj.cool, 100)  // not awesome
+        
+    </script>
 </body>
 
 </html>
