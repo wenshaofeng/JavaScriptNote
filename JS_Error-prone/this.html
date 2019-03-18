@@ -46,6 +46,24 @@
         fn.bind().bind(a3)() // => ?  window
 
         console.log(null == undefined);
+
+        // 3 
+        var Boy = {
+            a: 2 ,
+            boo: function() {
+                console.log(this.a);   
+            }
+        }
+
+        function get() {
+            let a = 4      
+            setTimeout(()=>{
+                let _this = Boy.boo  //function(){console.log(this.a)}
+                _this() //执行了 ,this 取决于 包裹它的作用域的this ， 也就是函数 get() 的this，也就是全局对象 
+
+            })
+        }
+        get()
     </script>
 
     第一题:

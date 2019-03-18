@@ -10,8 +10,23 @@
 
 <body>
     <script>
-     
+        var Boy = {
+            a: 2,
+            boo: function () {
+                console.log(this.a);
+            }
+        }
+
+        function get() {
+            let a = 4
+            setTimeout(() => {
+                let _this = Boy.boo
+                _this()
+            })
+        }
+        get()
     </script>
+    
 </body>
 
 </html>
