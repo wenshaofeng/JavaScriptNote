@@ -59,255 +59,254 @@
 /* 2 */
 /***/ (function(module, exports) {
 
-	"use strict";
+	'use strict';
 
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+	function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
+
+	/* 
+	 ES6会强制开启严格模式 use strict
+	 let 为块级作用域
+	 let 变量不能重复定义
+	 暂存性死区（通常用来描述let和const的不提升效果）
+	 let 声明的变量一定要在声明后使用，否则报错 */
+
+	/* function test() {
+	   for (let i = 1; i < 3; i++) {  //let 为块级作用域
+	      console.log(i);
+	   }
+	   console.log(i);  //Uncaught ReferenceError: i is not defined
+
+	   let a = 1
+	   let a = 5  //let 变量不能重复定义
+
+	   // var 的情况                         //let不会提升
+	   console.log(foo); // 输出undefined
+	   var foo = 2;
+	   let a = 2
+	   // let a = 3
+	   // // let 的情况
+	   console.log(bar); // 报错ReferenceError
+	   let bar = 2;
+
+	   if (true) {
+	      // TDZ开始 (暂时性死区)
+	      tmp = 'abc'; // ReferenceError
+	      console.log(tmp); // ReferenceError
+
+	      let tmp; // TDZ结束
+	      console.log(tmp); // undefined
+
+	      tmp = 123;
+	      console.log(tmp); // 123
+	   }
+
+	}
+	test() */
+
+	/*   const 为常量，不能再次赋值，且初次定义就必须赋值
+	     注意：const声明不允许修改绑定，但是允许修改值
+
+	*/
+
+	/* function test1() {
+	   const PI = 456
+	   PI = 45 // 报错
+	   console.log(PI);
+
+	}
+	test1()
+
+	const a = {name:"科比"}
+	a.name = "詹姆斯"
+
+	console.log(a);  // 詹姆斯
+	 */
+
+	/* var condition = true
+
+	if(condition){
+	   console.log('fuck');
+	   
+	   console.log(typeof value) // 引用错误  ReferenceError: value is not defined
+	   let value = "blue"
+	} */
+
+	/* var Array = "hello"
+	console.log(window.Array)
+
+	var nice = 'hehe'
+	console.log(window.nice) */
+
+	/*************解构赋值*******************/
+	//数组
 	{
-	    var list = new Set();
-	    list.add(5);
-	    list.add(7);
+	   console.log('数组解构');
 
-	    console.log("size", list.size); // size 2
+	   var a = void 0,
+	       b = void 0,
+	       res = void 0;
+	   a = 1;
+	   b = 5;
+
+	   console.log(a, b); // 1 5 
 	}
 
 	{
-	    var arr = [1, 2, 3, 3, 4, 4, 5];
-	    var _list = new Set(arr);
+	   var _a = void 0,
+	       _b = void 0,
+	       rest = void 0;
+	   _a = 1;
+	   _b = 2;
+	   rest = [3, 4, 5, 6];
 
-	    console.log("size", _list.size); // size 5
+	   console.log(_a, _b, rest); //1 2 Array [ 3, 4, 5, 6 ]
 	}
 
-	// 去重
+	//对象
 	{
-	    var _list2 = new Set();
-	    _list2.add(1);
-	    _list2.add(2);
-	    _list2.add(1);
+	   var _a2 = void 0,
+	       _b2 = void 0;
+	   var _a$b = { a: 6, b: 2 };
+	   _a2 = _a$b.a;
+	   _b2 = _a$b.b;
 
-	    console.log("list", _list2); // set(1,2)
-
-
-	    var _arr = [1, 2, 3, 1, 2];
-	    var list2 = new Set(_arr);
-	    console.log("unique", list2); // set(1,2,3)
+	   console.log(_a2, _b2); // 6 2
 	}
 
-	{
-	    //增加、删除、清空、查询
-	    var _arr2 = ['add', 'delete', 'clear', 'has'];
-	    var _list3 = new Set(_arr2);
-
-	    console.log("has", _list3.has('add'));
-	    console.log("delete", _list3.delete('add'), _list3);
-	    _list3.clear();
-	    console.log("list", _list3);
-	}
+	//应用:
+	// 1.变量交换
 
 	{
-	    //遍历
-	    var _arr3 = ['add', 'delete', 'clear', 'has'];
-	    var _list4 = new Set(_arr3);
+	   var _a3 = 8;
+	   var _b3 = 2;
+	   var _ref = [_b3, _a3];
+	   _a3 = _ref[0];
+	   _b3 = _ref[1];
 
-	    var _iteratorNormalCompletion = true;
-	    var _didIteratorError = false;
-	    var _iteratorError = undefined;
-
-	    try {
-	        for (var _iterator = _list4.keys()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	            var key = _step.value;
-
-	            console.log("key", key);
-	        }
-	    } catch (err) {
-	        _didIteratorError = true;
-	        _iteratorError = err;
-	    } finally {
-	        try {
-	            if (!_iteratorNormalCompletion && _iterator.return) {
-	                _iterator.return();
-	            }
-	        } finally {
-	            if (_didIteratorError) {
-	                throw _iteratorError;
-	            }
-	        }
-	    }
-
-	    var _iteratorNormalCompletion2 = true;
-	    var _didIteratorError2 = false;
-	    var _iteratorError2 = undefined;
-
-	    try {
-	        for (var _iterator2 = _list4.values()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-	            var value = _step2.value;
-
-	            console.log("value", value);
-	        }
-	    } catch (err) {
-	        _didIteratorError2 = true;
-	        _iteratorError2 = err;
-	    } finally {
-	        try {
-	            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-	                _iterator2.return();
-	            }
-	        } finally {
-	            if (_didIteratorError2) {
-	                throw _iteratorError2;
-	            }
-	        }
-	    }
-
-	    _list4.forEach(function (item) {
-	        console.log(item);
-	    });
+	   console.log(_a3, _b3); //2 8
 	}
 
 	{
-	    //weakList
-	    var weakList = new WeakSet(); //  只能是对象
+	   var _a4 = 8;
+	   var _b4 = 18;
+	   var _a$b2 = { a: _b4, b: _a4 };
+	   _a4 = _a$b2.a;
+	   _b4 = _a$b2.b;
 
-	    var arg = {};
-
-	    weakList.add(arg);
-
-	    console.log("weakList", weakList);
+	   console.log(_a4, _b4); //18 8 
 	}
-
-	// Set添加元素用add,map添加元素用set
+	// 2.接收函数返回值
 	{
-	    var map = new Map();
-	    var _arr4 = ['123'];
+	   var f = function f() {
+	      return [1, 2];
+	   };
 
-	    map.set(_arr4, 456); // ['123','456']
-	    console.log("map");
-	    console.log(map);
-	    console.log(map.get(_arr4));
+	   var _a5 = void 0,
+	       _b5 = void 0;
+
+	   var _f = f();
+
+	   var _f2 = _slicedToArray(_f, 2);
+
+	   _a5 = _f2[0];
+	   _b5 = _f2[1];
+
+	   console.log(_a5, _b5); // 1 2
+	}
+	// 3.返回多个值时，可以选择性接收自己想要的某几个变量
+	{
+	   var _f3 = function _f3() {
+	      return [1, 2, 3, 4, 5];
+	   };
+
+	   var _a6 = void 0,
+	       _b6 = void 0,
+	       c = void 0;
+
+	   var _f4 = _f3();
+
+	   var _f5 = _slicedToArray(_f4, 4);
+
+	   _a6 = _f5[0];
+	   _b6 = _f5[3];
+
+	   console.log(_a6, _b6); //1 4
+	}
+
+	// 4.不知道函数返回数组的长度，只想取出前几个元素，其余用数组表示
+	{
+	   var _f6 = function _f6() {
+	      return [1, 2, 3, 4, 5];
+	   };
+
+	   var _a7 = void 0,
+	       _b7 = void 0,
+	       _c = void 0;
+
+	   var _f7 = _f6();
+
+	   var _f8 = _toArray(_f7);
+
+	   _a7 = _f8[0];
+	   _b7 = _f8.slice(1);
+
+	   console.log(_a7, _b7); //1 [2,3,4,5]
+	}
+
+	// 对象解构赋值
+	{
+	   var _a8 = { p: 3, q: true };
+	   var p = _a8.p,
+	       q = _a8.q;
+
+	   console.log(p, q); // 3 true
 	}
 
 	{
-	    var _map = new Map([['a', 123], ['b', 456]]);
-	    console.log("map args", _map);
-	    console.log("size", _map.size);
-	    console.log("size", _map.delete('a'), _map);
-	    console.log("clear", _map.clear(), _map);
+	   var _a10 = { a: 3 },
+	       _a10$a = _a10.a,
+	       _a9 = _a10$a === undefined ? 10 : _a10$a,
+	       _a10$b = _a10.b,
+	       _b8 = _a10$b === undefined ? 5 : _a10$b;
+
+	   console.log(_a9, _b8); //3 5
 	}
 
 	{
-	    var weakmap = new WeakMap(); // 接收的只能是对象
-	    var o = {};
-	    weakmap.set(o, 123);
-	    console.log(weakmap.get(o));
+	   var metaData = {
+	      title: 'abc',
+	      test: [{
+	         title: 'test',
+	         desc: 'description'
+	      }]
+	   };
+
+	   var esTitle = metaData.title,
+	       _metaData$test = _slicedToArray(metaData.test, 1),
+	       cnTitle = _metaData$test[0].title;
+
+	   console.log(esTitle, cnTitle); //'abc' test
 	}
 
+	//实际上，对象的解构赋值是下面形式的简写
 	{
-	    //  数据结构横向对比，增、删、改、查
-	    var _map2 = new Map();
-	    var array = [];
-	    // 增
-	    _map2.set('t', 1);
-	    array.push({ t: 1 });
-
-	    console.info("map-array", _map2, array);
-
-	    // 查
-	    var map_exist = _map2.has('t'); // true
-	    var array_exist = array.find(function (item) {
-	        return item.t;
-	    });
-
-	    console.info("map-array", map_exist, array_exist);
-
-	    // 改
-	    _map2.set('t', 2);
-	    array.forEach(function (item) {
-	        return item.t ? item.t = 2 : '';
-	    });
-
-	    console.info("map-array", _map2, array);
-
-	    // 删
-	    _map2.delete('t');
-	    var index = array.findIndex(function (item) {
-	        return item.t;
-	    });
-	    array.splice(index, 1);
-	    console.info('map-array', _map2, array);
+	   var _foo$bar = { foo: "aaa", bar: "bbb" },
+	       foo = _foo$bar.foo,
+	       bar = _foo$bar.bar;
 	}
+	/* 也就是说，对象的解构赋值的内部机制，是先找到同名属性，
+	然后再赋给对应的变量。真正被赋值的是后者，而不是前者。 */
 
-	// set和array对比
-	{
-	    var set = new Set();
-	    var _array = [];
+	/* {
+	   let { foo: baz } = { foo: "aaa", bar: "bbb" };
+	   baz // "aaa"
+	   foo // error: foo is not defined
 
-	    // 增
-	    set.add({ t: 1 });
-	    _array.push({ t: 1 });
-
-	    console.log("set-array", set, _array);
-
-	    // 查
-	    var set_exist = set.has({ t: 1 }); // false
-	    var _array_exist = _array.find(function (item) {
-	        return item.t;
-	    });
-
-	    console.info("set-array", set_exist, _array_exist);
-
-	    // 改
-	    set.forEach(function (item) {
-	        return item.t ? item.t = 2 : '';
-	    });
-	    _array.forEach(function (item) {
-	        return item.t ? item.t = 2 : '';
-	    });
-
-	    console.info("set-array-modify", set, _array);
-
-	    // 删
-	    set.forEach(function (item) {
-	        return item.t ? set.delete(item) : '';
-	    });
-	    var _index = _array.findIndex(function (item) {
-	        return item.t;
-	    });
-	    _array.splice(_index, 1);
-	    console.info('set-array-empty', set, _array);
-	}
-
-	// Map、set、Object的对比
-	{
-	    var item = { t: 1 };
-	    var _map3 = new Map();
-	    var _set = new Set();
-	    var obj = {};
-
-	    // 增
-	    _map3.set('t', 1);
-	    _set.add(item);
-	    obj['t'] = 1;
-
-	    console.info('map-set-obj', obj, _map3, _set);
-
-	    // 查
-	    console.info({
-	        map_exist: _map3.has('t'),
-	        set_exist: _set.has(item),
-	        obj_exist: 't' in obj
-	    });
-
-	    // 改
-	    _map3.set('t', 2);
-	    item.t = 2;
-	    obj['t'] = 2;
-	    console.info('map-set-obj-modify', obj, _map3, _set);
-
-	    // 删
-	    _map3.delete('t');
-	    _set.delete(item);
-	    delete obj['t'];
-
-	    console.info('map-set-obj-empty', obj, _map3, _set);
-	}
+	   //foo是匹配的模式，baz才是变量。
+	   //真正被赋值的是变量baz，而不是模式foo。
+	} */
 
 /***/ })
 /******/ ]);

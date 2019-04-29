@@ -10,27 +10,58 @@
 
 <body>
     <!-- <script>
-        function foo(num) {
-            console.log("foo:" + num);
-            this.count++
-            console.log(this);
-            
-        }
+        function sleep(millisecond) {
+  return new Promise(resolve => {
+    setTimeout(() => resolve, millisecond)
+  })
+}
 
-        foo.count = 0 
+/**
+ * 以下是测试代码
+ */
+async function test() {
+  console.log('start')
+  await sleep(1000) // 睡眠1秒
+  console.log('end')
+  return 'done';
+}
 
-        for(var i = 0 ; i<10; i++) {
-            if(i>5) {
-                foo(i)
-            }
-        }
+test().then(val=>{
+    console.log(val);
+    
+}) // 执行测试函数
 
-        console.log(foo.count) // 0 
+
     </script> -->
 
     <script>
-        
-        
+        function sleep(second) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log(Math.random());
+                    resolve();
+                }, second);
+            });
+        }
+
+        async function chuanXingDemo() {
+            await sleep(1000);
+            await sleep(1000);
+            await sleep(1000);
+        }
+
+
+        async function bingXingDemo() {
+            var tasks = [];
+            for (let i = 0; i < 3; ++i) {
+                tasks.push(sleep(1000));
+            }
+
+            await Promise.all(tasks);
+        }
+
+        chuanXingDemo()
+        bingXingDemo()
     </script>
 
 </body>

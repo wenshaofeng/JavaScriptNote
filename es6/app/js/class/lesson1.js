@@ -3,10 +3,10 @@
  ES6会强制开启严格模式 use strict
  let 为块级作用域
  let 变量不能重复定义
- 暂存性死区
+ 暂存性死区（通常用来描述let和const的不提升效果）
  let 声明的变量一定要在声明后使用，否则报错 */
 
-function test() {
+/* function test() {
    for (let i = 1; i < 3; i++) {  //let 为块级作用域
       console.log(i);
    }
@@ -19,7 +19,7 @@ function test() {
    console.log(foo); // 输出undefined
    var foo = 2;
    let a = 2
-   let a = 3
+   // let a = 3
    // // let 的情况
    console.log(bar); // 报错ReferenceError
    let bar = 2;
@@ -37,16 +37,41 @@ function test() {
    }
 
 }
-test()
+test() */
 
-//  const 为常量，不能再次赋值，且初次定义就必须赋值
-function test1() {
-   const PI
-   PI = 45
+/*   const 为常量，不能再次赋值，且初次定义就必须赋值
+     注意：const声明不允许修改绑定，但是允许修改值
+
+*/
+
+/* function test1() {
+   const PI = 456
+   PI = 45 // 报错
    console.log(PI);
 
 }
 test1()
+
+const a = {name:"科比"}
+a.name = "詹姆斯"
+
+console.log(a);  // 詹姆斯
+ */
+
+/* var condition = true
+
+if(condition){
+   console.log('fuck');
+   
+   console.log(typeof value) // 引用错误  ReferenceError: value is not defined
+   let value = "blue"
+} */
+
+/* var Array = "hello"
+console.log(window.Array)
+
+var nice = 'hehe'
+console.log(window.nice) */
 
 
 /*************解构赋值*******************/
@@ -149,11 +174,11 @@ test1()
 /* 也就是说，对象的解构赋值的内部机制，是先找到同名属性，
 然后再赋给对应的变量。真正被赋值的是后者，而不是前者。 */
 
-{
+/* {
    let { foo: baz } = { foo: "aaa", bar: "bbb" };
    baz // "aaa"
    foo // error: foo is not defined
 
    //foo是匹配的模式，baz才是变量。
    //真正被赋值的是变量baz，而不是模式foo。
-}
+} */
