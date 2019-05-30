@@ -10,21 +10,13 @@
 
 <body>
     <script>
-        var Boy = {
-            a: 2,
-            boo: function () {
-                console.log(this.a);
-            }
-        }
-
-        function get() {
-            let a = 4
-            setTimeout(() => {
-                let _this = Boy.boo
-                _this()
-            })
-        }
-        get()
+     var arr =  [ 0, 0, 0, 0, 0 ]
+     function change4(arr){
+       const newArr = arr.map((item,index)=>{
+            return String.fromCharCode('A'.charCodeAt()+index)
+        })
+        return newArr
+     }
     </script>
     
 </body>

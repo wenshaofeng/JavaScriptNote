@@ -81,3 +81,12 @@ async function  f() {
 f().then( (v) => console.log(v)) // 1
 ```
 
+应用
+```javascript
+    //先拿到数据再跳转页面
+    async handleLogout() {
+    await this.$store.dispatch("user/logout");
+    this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+    }
+
+```
