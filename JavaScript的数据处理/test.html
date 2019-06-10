@@ -2,34 +2,37 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="application/javascript" src="https://cdn.staticfile.org/moment.js/2.21.0/moment.min.js"></script>
-    <title>测试</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script type="application/javascript" src="https://cdn.staticfile.org/moment.js/2.21.0/moment.min.js"></script>
+  <title>测试</title>
+  <style lang="css">
+    .container {
+      display: flex;
+      justify-content: center;
+        align-items: center;
+      position: relative;
+      width: 500px;
+      height: 200px;
+      background: yellow;
+    }
+
+    .item {
+      width: 300px;
+      height: 100px;     
+      background: blue;
+      overflow: hidden;
+    }
+  </style>
 </head>
 
 <body>
-    <script>
-        function isEmptyObject(obj) {
-            var name;
-            for (name in obj) {
-                return false // 如果有属性就会返回false
-            }
-            return true
-        }
-
-        var a = {b:1}
-        console.log(isEmptyObjcet(a));
-        
-        console.log(isEmptyObject({})); // true
-        console.log(isEmptyObject([])); // true
-        console.log(isEmptyObject(null)); // true
-        console.log(isEmptyObject(undefined)); // true
-        console.log(isEmptyObject(1)); // true
-        console.log(isEmptyObject('')); // true
-        console.log(isEmptyObject(true)); // true
-    </script>
+  <div class="container">
+    <div class="item">
+      aaaaaadsadsadsada
+    </div>
+  </div>
 
 </body>
 
