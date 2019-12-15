@@ -71,12 +71,10 @@ let ninja2 = { name: 'Yoshi'}
 ninja2 = makeLoggable(ninja2)
 
 console.log(ninja2.name)
-ninja2.age = 12
-console.log(ninja2.age);
-console.log(ninja2);
+
 
 /* 
     显然，使用代理后，所有的属性的读和写，都会自动执行日志记录，不需要我们
-    为一个个属性去设置 get 和 set
+    一个一个去设置
 
 */

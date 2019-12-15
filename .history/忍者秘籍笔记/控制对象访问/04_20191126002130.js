@@ -45,16 +45,14 @@ function Ninja () {
 }
 
 const ninja = new Ninja()
-ninja.skillLevel // skillLevel get method is called
-ninja.skillLevel = 4 // skillLevel set method is called
-
-
+ninja.skillLevel
+ninja.skillLevel = 4
 
 /* 
    使用代理的日志记录
  */
 
-function makeLoggable(target) {
+/* function makeLoggable(target) {
     return new Proxy(target, {
         get: (target, property) => {
             console.log('reading '+ property)
@@ -67,16 +65,8 @@ function makeLoggable(target) {
     })
 }
 
-let ninja2 = { name: 'Yoshi'}
-ninja2 = makeLoggable(ninja2)
+let ninja = { name: 'Yoshi'}
+ninja = makeLoggable(ninja)
 
-console.log(ninja2.name)
-ninja2.age = 12
-console.log(ninja2.age);
-console.log(ninja2);
-
-/* 
-    显然，使用代理后，所有的属性的读和写，都会自动执行日志记录，不需要我们
-    为一个个属性去设置 get 和 set
-
-*/
+console.log(ninja.name)
+ */
