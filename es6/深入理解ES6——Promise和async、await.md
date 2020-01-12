@@ -1,5 +1,5 @@
 ## Promise
-
+![promise简介](img/promise.jpg)
 ### 红绿灯问题
 题目：红灯亮3秒，绿灯亮1秒，黄灯亮2秒；如何让三个灯不断交替重复亮灯？（用 Promise 实现）
 
@@ -127,6 +127,90 @@ Promise 一旦新建它就会立即执行，无法中途取消。
 #### 4. 无法得知 pending 状态
 当处于 pending 状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。
 
+#### .then 和 .catch 
+• resolved 状态的Promise 会回调后面的第一个.then
+• rejected 状态的Promise 会回调后面的第一个.catch
+• 任何一个rejected 状态且后面没有.catch 的Promise，都会造成浏览器/node 环境
+的全局错误
+
+执行then 和catch 会返回一个新Promise，该Promise 最终状态根据then 和
+catch 的回调函数的执行结果决定
+• 如果回调函数最终是throw，该Promise 是rejected 状态
+• 如果回调函数最终是return，该Promise 是resolved 状态
+• 但如果回调函数最终return 了一个Promise ，该Promise 会和回调函数return 的
+Promise 状态保持一致
+
+
+#### Promise.all
+```js
+
+/**
+ * Promise的最后一个例子，把前面的例子都整合进来了
+ * 
+ * 进行三轮面试，都通过之后征求所有家庭成员的同意
+ * 只要有一处不通过则面试失败
+ */
+
+interview(1)
+    .then(() => {
+        return interview(2);
+    })
+    .then(() => {
+        return interview(3);
+    })
+    .then(() => {
+        return Promise.all([
+            family('father').catch(() => { /* 忽略老爸的的反对意见 */ }),
+            family('mother'),
+            family('wife'),
+
+        ]).catch(e => {
+            e.round = 'family'
+            throw e;
+        })
+    })
+    .then(() => {
+        console.log('success');
+    })
+    .catch((err) => {
+        console.log('cry at ' + err.round)
+    })
+
+
+
+
+
+
+function interview(round) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (Math.random() < 0.2) {
+                const error = new Error('failed');
+                error.round = round;
+                reject(error);
+
+            } else {
+                resolve('success');
+            }
+        }, 500)
+    })
+}
+function family(name) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (Math.random() < 0.2) {
+                const error = new Error('disagree');
+                error.name = name;
+                reject(error);
+
+            } else {
+                resolve('agree');
+            }
+        }, Math.random() * 400)
+    })
+}
+```
+
 ## async/await介绍
 
 >async
@@ -139,6 +223,7 @@ Promise 一旦新建它就会立即执行，无法中途取消。
 
 async函数返回一个Promise对象，可以使用then方法添加回调函数。
 
+一个穿越事件循环存在的function
 ```javascript
 async function  f() {
     return 'hello world'

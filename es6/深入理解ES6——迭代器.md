@@ -117,6 +117,9 @@ for(let warrior of WarriorGenerator()) {
 ```
 
 - 向生成器发送数据及从生成器接收数据 
+> 这里有一个特例，第一次调用 next() 方法时无论传入什么参数都会被丢弃，
+传给 next() 方法的参数会替代上一次 yield 的返回值，而在第一次调用 next()
+方法前不会执行任何 yield 语句，因此在第一次调用 next() 方法时传递参数是毫无意义的
 
 ```js
 function* NinjaGenerator2(action) {
@@ -152,8 +155,8 @@ function* NinjaGenerator3() {
 }
 const ninjaIterator3 = NinjaGenerator3();
 const res = ninjaIterator3.next();
-console.log(res.value);  // Hattori
 ninjaIterator3.throw("Catch this!"); //true 'Aha! We caught an exception'
+console.log(res.value);  // Hattori
 
 ```
 

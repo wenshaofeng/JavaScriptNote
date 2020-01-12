@@ -8,6 +8,7 @@ static/mock
 # Editor directories and files
 .idea
 .vscode
+.history
 *.suo
 *.ntvs*
 *.njsproj

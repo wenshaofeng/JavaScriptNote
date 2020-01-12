@@ -1,17 +1,24 @@
+## Symbol
+
+#### 创建 Symbol
+```js
 {
-    // 声明
-    // 保证声明的变量独一无二
-    let a1 = Symbol();
+    let a1 = Symbol()
     let a2 = Symbol();
-    console.log(a1 === a2);  // false
-    console.log(typeof a1);
-    
+    console.log(a1 === a2); // false
     let a3 = Symbol.for('a3');
     let a4 = Symbol.for('a3');
-    console.log(a3 === a4);
-    console.log(a3 );
-}
+    console.log(a3 === a4); // true
 
+    // 检测变量类型
+     console.log(typeof a1); // "symbol"
+}
+    
+```
+
+#### 关于遍历对象属性
+
+```js
 {
     let a1 = Symbol.for('abc');
     let a2 = Symbol.for('c')
@@ -41,3 +48,4 @@
         console.log('ownkeys', item, obj[item]);
     })
 }
+```
