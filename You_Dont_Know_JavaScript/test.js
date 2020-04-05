@@ -1,38 +1,20 @@
-// function changeName(person) {
-//     with(person) {
-//       name = 'BigBear'
-//       console.log(person);
+(function() {
 
-//     }
-//   }
+  console.log(typeof foo); // function pointer
+  console.log(foo()); // function pointer
+  console.log(typeof bar); // undefined
 
-//   var me = {
-//     name: 'xiuyan',
-//     career: 'coder',
-//     hobbies: ['coding', 'footbal']
-//   }
+  var foo = 'hello',
+      bar = function() {
+          return 'world';
+      };
 
-//   var you = {
-//     career: 'product manager'
-//   }
-
-//   changeName(me)
-// //   changeName(you)
-//   console.log(name) // 输出 'BigBear'
-function foo(a,b){
-    console.log(b);
-    return {
-      foo:function(c){
-        return foo(c,a);
-      }
-    }
+  function foo() {
+      return 'hello';
   }
-   
-  var func1=foo(0);
-  func1.foo(1);
-  func1.foo(2);
-  func1.foo(3);
-  var func2=foo(0).foo(1).foo(2).foo(3);
-  var func3=foo(0).foo(1);
-  func3.foo(2);
-  func3.foo(3);
+
+  function foo() {
+    return 'baby';
+}
+
+}())
