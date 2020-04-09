@@ -116,11 +116,10 @@ function foo() {
     this.bar()
 }
 function bar() {
-    console.log('hehe')
-
+    console.log( this.a );
 }
 
-foo() // undefined
+foo()  // ReferenceError: a is not defined
 ```
 
 ### this 到底是什么 
@@ -143,13 +142,148 @@ this 是在运行时进行绑定的，并不是在编写时绑定，它的上下
 
 #### 默认绑定
 
+> `this`默认会绑定到全局对象上,如果是严格模式，`this`为`undefined`
+
+```js
+function foo() {
+  console.log(this.a);
+}
+var a = 2;
+(function () {
+  "use strict";
+  console.dir(foo)
+  foo(); // 2
+})();
+
+### 这里的严格模式是指 foo()函数体内的代码运行在严格模式下
+function foo() {
+  "use strict";
+  console.log(this.a);
+}
+var a = 2;
+(function () {
+  "use strict";
+  console.dir(foo)
+  foo(); // TypeError:  Cannot read property 'a' of undefined
+})();
+```
+
+
+
 #### 隐式绑定
+
+##### 隐式丢失
+
+隐式丢失是指被隐式绑定的函数丢失绑定对象，从而默认绑定到window。这种情况容易出错却又常见
+
+这三种特殊情境下，this 会 100% 指向 window：
+
+- 立即执行函数（IIFE）
+- setTimeout 中传入的函数
+- setInterval 中传入的函数
+- 事件监听器的处理函数
+
+```js
+var name = 'BigBear'
+
+var me = {
+  name: 'xiuyan',
+  // 声明位置
+  sayHello: function() {
+    console.log(`你好，我是${this.name}`)
+  },
+  hello: function() {
+    (function(cb) {
+      // 调用位置
+      cb()
+    })(this.sayHello)
+  }
+}
+
+me.hello() // '你好，我是BigBear'
+
+### setTimeout 
+
+var name = 'BigBear'
+
+var me = {
+  name: 'xiuyan',
+  hello: function() {
+    setTimeout(function() {
+      console.log(`你好，我是${this.name}`)
+    })
+  }
+}
+
+me.hello() // 你好，我是BigBear
+```
+
+
+
+
 
 #### 显示绑定
 
+通过call()、apply()、bind()方法把对象绑定到this上，叫做显式绑定。对于被调用的函数来说，叫做间接调用
+
+>- call、apply 和 bind 之间的区别比较大，前者在改变 this 指向的同时，也会把目标函数给执行掉；后者则只负责改造 this，不作任何执行操作。
+>
+>- call 和 apply 之间的区别，则体现在对入参的要求上。前者只需要将目标函数的入参逐个传入即可，后者则希望入参以数组形式被传入。
+
+##### call
+
+例子
+
+```js
+var me = {
+  name: 'zhangsan'
+}
+
+function showName(doing) {
+  console.log(`${this.name} is ${doing}`)
+}
+
+showName.call(me,'eating') // zhangsan is eating 
+
+## call 方法做了两件事：
+1. 改变 this 的指向，将 this 绑到第一个入参指定的的对象上去；
+2. 根据输入的参数，执行函数。
+```
+
+##### 实现一个call
+
+```js
+
+```
+
+
+##### apply
+```js
+
+```
+##### 实现一个apply 
+```js
+
+```
+##### bind 
+
+```js
+
+```
+##### 实现一个bind 
+```js
+
+```
+
 #### new绑定
 
+##### new 做了什么
+
+
+
 ### 优先级 
+
+
 
 
 ## 对象
